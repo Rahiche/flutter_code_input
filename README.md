@@ -4,7 +4,8 @@ Code input wdiget : segmented code input control
 
 ## This is the Widget
 
-![gif]([Imgur](https://i.imgur.com/en5C9HZ.gif)
+<img src="https://i.imgur.com/en5C9HZ.gif" width="200"/>
+
 
 ## Example
 
