@@ -1,10 +1,25 @@
 # code_input
 
-Code input wdiget : segmented code input control 
+Code input widget : segmented code input control
+
+
+## install it
+
+```
+dependencies:
+  code_input: ^0.0.2
+```
+
+## import it
+
+```
+import 'package:code_input/code_input.dart';
+```
 
 ## This is the Widget
 
-![gif]([Imgur](https://i.imgur.com/en5C9HZ.gif)
+<img src="https://i.imgur.com/en5C9HZ.gif" width="200"/>
+
 
 ## Example
 
