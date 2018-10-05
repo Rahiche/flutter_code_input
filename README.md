@@ -31,7 +31,7 @@ return Scaffold(
   body: Center(
     child: CodeInput(
       //how many input widget you want  
-      lenght: 5,
+      length: 5,
     ),
   ),
 );
