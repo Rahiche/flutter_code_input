@@ -4,7 +4,17 @@
 .packages
 .pub/
 
+flutter_code_input.iml
+flutter_code_input_android.iml
+
 build/
+android/
+ios/
 ios/.generated/
 ios/Flutter/Generated.xcconfig
 ios/Runner/GeneratedPluginRegistrant.*
+
+.metadata
+launch.json
+*.lock
+*.xml
