@@ -26,7 +26,7 @@ For more information about the properties, have a look at the [API reference](ht
 ## LICENSE
 
 ```legal
-Copyright (c) 2018 Marcel Garus & Rahiche
+Copyright (c) 2018 Marcel Garus & Rahiche Raouf
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
