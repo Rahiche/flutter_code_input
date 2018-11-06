@@ -19,7 +19,7 @@ CodeInput(
 )
 ```
 
-<img src="https://i.imgur.com/en5C9HZ.gif" width="200"/>
+<img src="https://github.com/Rahiche/flutter_code_input/blob/master/screenshots/new%20code%20input.gif?raw=true" width="200"/>
 
 For more information about the properties, have a look at the [API reference](https://pub.dartlang.org/documentation/code_input/).
 
