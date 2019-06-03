@@ -189,7 +189,8 @@ class _CodeInputState extends State<CodeInput> {
             final focusScope = FocusScope.of(context);
             focusScope.requestFocus(FocusNode());
             Future.delayed(
-                Duration.zero, () => focusScope.requestFocus(widget.focusNode));
+              Duration.zero, () => focusScope.requestFocus(widget.focusNode),
+            );
           },
           child: Container(
             color: Colors.transparent,
