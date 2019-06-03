@@ -29,6 +29,7 @@ class CodeInput extends StatefulWidget {
   const CodeInput._({
     Key key,
     @required this.length,
+    @required this.focusNode,
     @required this.keyboardType,
     @required this.inputFormatters,
     @required this.builder,
@@ -39,6 +40,7 @@ class CodeInput extends StatefulWidget {
   factory CodeInput({
     Key key,
     @required int length,
+    FocusNode focusNode = FocusNode(),
     TextInputType keyboardType = TextInputType.text,
     List<TextInputFormatter> inputFormatters,
     @required CodeInputBuilder builder,
@@ -76,9 +78,27 @@ class CodeInput extends StatefulWidget {
   /// ```
   final int length;
 
-  /// The type of thconstard which shows up.
+  /// Defines the keyboard focus for this widget.
   ///
-  /// ## Sample codeconst
+  /// The [focusNode] is a long-lived object that's typically managed by a
+  /// [StatefulWidget] parent. See [FocusNode] for more information.
+  ///
+  /// ## Sample code
+  ///
+  /// ```dart
+  /// CodeInput(focusNode: myFocusNode);
+  /// ```
+  ///
+  /// You can then request the `CodeInput`'s focus by calling:
+  ///
+  /// ```dart
+  /// FocusScope.of(context).requestFocus(myFocusNode);
+  /// ```
+  final FocusNode focusNode;
+
+  /// The type of keyboard which shows up.
+  ///
+  /// ## Sample code
   ///
   /// ```dart
   /// CodeInput(keyboardType: TextInputType.number)
@@ -116,8 +136,8 @@ class CodeInput extends StatefulWidget {
   /// A callback for when the input is filled.
   final void Function(String value) onFilled;
 
-  /// A helping function that creates input formatters for a given length and
-  /// keyboardType.
+  /// A helping function that creates input formatters for a given [length] and
+  /// [keyboardType].
   static List<TextInputFormatter> _createInputFormatters(
       int length, TextInputType keyboardType) {
     final formatters = <TextInputFormatter>[
@@ -139,7 +159,6 @@ class CodeInput extends StatefulWidget {
 }
 
 class _CodeInputState extends State<CodeInput> {
-  final node = FocusNode();
   final controller = TextEditingController();
 
   String get text => controller.text;
@@ -156,7 +175,7 @@ class _CodeInputState extends State<CodeInput> {
           height: 0.0,
           child: EditableText(
             controller: controller,
-            focusNode: node,
+            focusNode: widget.focusNode,
             inputFormatters: widget.inputFormatters,
             keyboardType: widget.keyboardType,
             backgroundCursorColor: Colors.black,
@@ -178,7 +197,10 @@ class _CodeInputState extends State<CodeInput> {
           onTap: () {
             final focusScope = FocusScope.of(context);
             focusScope.requestFocus(FocusNode());
-            Future.delayed(Duration.zero, () => focusScope.requestFocus(node));
+            Future.delayed(
+              Duration.zero,
+              () => focusScope.requestFocus(widget.focusNode),
+            );
           },
           child: Container(
             color: Colors.transparent,
