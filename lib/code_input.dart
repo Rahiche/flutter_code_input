@@ -78,16 +78,25 @@ class CodeInput extends StatefulWidget {
   /// ```
   final int length;
 
-  /// A focus node.
+  /// Defines the keyboard focus for this widget.
+  ///
+  /// The [focusNode] is a long-lived object that's typically managed by a
+  /// [StatefulWidget] parent. See [FocusNode] for more information.
   ///
   /// ## Sample code
   ///
   /// ```dart
-  /// Code(focusNode: FocusNode())
+  /// CodeInput(focusNode: myFocusNode);
+  /// ```
+  ///
+  /// You can then request the `CodeInput`'s focus by calling:
+  ///
+  /// ```dart
+  /// FocusScope.of(context).requestFocus(myFocusNode);
   /// ```
   final FocusNode focusNode;
 
-  /// The type of th keyboard which shows up.
+  /// The type of keyboard which shows up.
   ///
   /// ## Sample code
   ///
@@ -127,8 +136,8 @@ class CodeInput extends StatefulWidget {
   /// A callback for when the input is filled.
   final void Function(String value) onFilled;
 
-  /// A helping function that creates input formatters for a given length and
-  /// keyboardType.
+  /// A helping function that creates input formatters for a given [length] and
+  /// [keyboardType].
   static List<TextInputFormatter> _createInputFormatters(
       int length, TextInputType keyboardType) {
     final formatters = <TextInputFormatter>[
@@ -189,7 +198,8 @@ class _CodeInputState extends State<CodeInput> {
             final focusScope = FocusScope.of(context);
             focusScope.requestFocus(FocusNode());
             Future.delayed(
-              Duration.zero, () => focusScope.requestFocus(widget.focusNode),
+              Duration.zero,
+              () => focusScope.requestFocus(widget.focusNode),
             );
           },
           child: Container(
