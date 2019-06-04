@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.0.1]
+* Add support custom focus node
+
 ## [1.0.0] - Stable release
 
 * Full rewrite of the library.
