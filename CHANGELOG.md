@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.0.3]
+* BUG FIX : Not a constant expression: unexpected kernel tag
+
 ## [1.0.2]
 * Add support custom focus node
 
