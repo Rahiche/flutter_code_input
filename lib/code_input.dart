@@ -26,7 +26,7 @@ import 'package:flutter/services.dart';
 typedef CodeInputBuilder = Widget Function(bool hasFocus, String char);
 
 class CodeInput extends StatefulWidget {
-  const CodeInput._({
+  CodeInput._({
     Key key,
     @required this.length,
     @required this.focusNode,
@@ -40,7 +40,7 @@ class CodeInput extends StatefulWidget {
   factory CodeInput({
     Key key,
     @required int length,
-    FocusNode focusNode = FocusNode(),
+    FocusNode focusNode,
     TextInputType keyboardType = TextInputType.text,
     List<TextInputFormatter> inputFormatters,
     @required CodeInputBuilder builder,
@@ -54,13 +54,13 @@ class CodeInput extends StatefulWidget {
     assert(builder != null,
         'The builder is required for rendering the character segments.');
 
-    inputFormatters ??= _createInputFormatters(length, keyboardType);
-
     return CodeInput._(
       key: key,
       length: length,
+      focusNode: focusNode ?? FocusNode(),
       keyboardType: keyboardType,
-      inputFormatters: inputFormatters,
+      inputFormatters:
+          inputFormatters ?? _createInputFormatters(length, keyboardType),
       builder: builder,
       onChanged: onChanged,
       onFilled: onFilled,
