@@ -16,6 +16,7 @@ import 'package:flutter/services.dart';
 ///   keyboardType: TextInputType.number,
 ///   builder: CodeInputBuilders.lightCircle(),
 ///   onFilled: (value) => print('Your input is $value.'),
+///   onDone: (value) => print('Your input is $value.'),
 /// )
 /// ```
 ///
@@ -35,6 +36,7 @@ class CodeInput extends StatefulWidget {
     @required this.builder,
     this.onChanged,
     this.onFilled,
+    this.onDone,
   }) : super(key: key);
 
   factory CodeInput({
@@ -46,6 +48,7 @@ class CodeInput extends StatefulWidget {
     @required CodeInputBuilder builder,
     void Function(String value) onChanged,
     void Function(String value) onFilled,
+    void Function(String value) onDone,
   }) {
     assert(length != null);
     assert(length > 0, 'The length needs to be larger than zero.');
@@ -64,6 +67,7 @@ class CodeInput extends StatefulWidget {
       builder: builder,
       onChanged: onChanged,
       onFilled: onFilled,
+      onDone: onDone,
     );
   }
 
@@ -119,7 +123,7 @@ class CodeInput extends StatefulWidget {
   /// ```dart
   /// CodeInput(
   ///   inputFormatters: [
-  ///     WhitelistingTextInputFormatter(RegExp('^[0-9a-fA-F]*\$'))
+  ///     FilteringTextInputFormatter.allow(RegExp('^[0-9a-fA-F]*\$'))
   ///   ]
   /// )
   /// ```
@@ -136,6 +140,9 @@ class CodeInput extends StatefulWidget {
   /// A callback for when the input is filled.
   final void Function(String value) onFilled;
 
+  /// A callback for when the done button clicked
+  final void Function(String value) onDone;
+
   /// A helping function that creates input formatters for a given [length] and
   /// [keyboardType].
   static List<TextInputFormatter> _createInputFormatters(
@@ -148,7 +155,7 @@ class CodeInput extends StatefulWidget {
     // For example, a code input with a number keyboard type probably doesn't
     // want to allow decimal separators or signs.
     if (keyboardType == TextInputType.number) {
-      formatters.add(WhitelistingTextInputFormatter(RegExp('^[0-9]*\$')));
+      formatters.add(FilteringTextInputFormatter.allow(RegExp('^[0-9]*\$')));
     }
 
     return formatters;
@@ -189,6 +196,9 @@ class _CodeInputState extends State<CodeInput> {
                     widget.onFilled?.call(value);
                   }
                 }),
+            onEditingComplete: () => setState((){
+              widget.onDone?.call(controller.text);
+            }),
           )),
       // These are the actual character widgets. A transparent container lies
       // right below the gesture detector, so all taps get collected, even
