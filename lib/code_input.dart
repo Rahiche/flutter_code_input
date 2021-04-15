@@ -119,7 +119,7 @@ class CodeInput extends StatefulWidget {
   /// ```dart
   /// CodeInput(
   ///   inputFormatters: [
-  ///     WhitelistingTextInputFormatter(RegExp('^[0-9a-fA-F]*\$'))
+  ///     FilteringTextInputFormatter.allow(RegExp('^[0-9a-fA-F]*\$'))
   ///   ]
   /// )
   /// ```
@@ -148,7 +148,7 @@ class CodeInput extends StatefulWidget {
     // For example, a code input with a number keyboard type probably doesn't
     // want to allow decimal separators or signs.
     if (keyboardType == TextInputType.number) {
-      formatters.add(WhitelistingTextInputFormatter(RegExp('^[0-9]*\$')));
+      formatters.add(FilteringTextInputFormatter.allow(RegExp('^[0-9]*\$')));
     }
 
     return formatters;
