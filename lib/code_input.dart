@@ -34,7 +34,7 @@ class CodeInput extends StatefulWidget {
     @required this.keyboardType,
     @required this.inputFormatters,
     @required this.builder,
-    this.padding,
+    this.spacing,
     this.onChanged,
     this.onFilled,
     this.onDone,
@@ -47,7 +47,7 @@ class CodeInput extends StatefulWidget {
     TextInputType keyboardType = TextInputType.text,
     List<TextInputFormatter> inputFormatters,
     @required CodeInputBuilder builder,
-    EdgeInsetsGeometry padding = const EdgeInsets.only(left: 2, right: 2),
+    double spacing = 2,
     void Function(String value) onChanged,
     void Function(String value) onFilled,
     void Function(String value) onDone,
@@ -67,7 +67,7 @@ class CodeInput extends StatefulWidget {
       inputFormatters:
           inputFormatters ?? _createInputFormatters(length, keyboardType),
       builder: builder,
-      padding: padding,
+      spacing: spacing,
       onChanged: onChanged,
       onFilled: onFilled,
       onDone: onDone,
@@ -138,7 +138,7 @@ class CodeInput extends StatefulWidget {
   final CodeInputBuilder builder;
 
   /// A parameter for customizing the padding between characters.
-  final EdgeInsetsGeometry padding;
+  final double spacing;
 
   /// A callback for changes to the input.
   final void Function(String value) onChanged;
@@ -227,7 +227,7 @@ class _CodeInputState extends State<CodeInput> {
                 final hasFocus = controller.selection.start == i;
                 final char = i < text.length ? text[i] : '';
                 final characterEntity = Padding(
-                  padding: widget.padding,
+                  padding: EdgeInsets.only(left: widget.spacing),
                   child: widget.builder(hasFocus, char),
                 );
 
