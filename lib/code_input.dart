@@ -47,7 +47,7 @@ class CodeInput extends StatefulWidget {
     TextInputType keyboardType = TextInputType.text,
     List<TextInputFormatter> inputFormatters,
     @required CodeInputBuilder builder,
-    double spacing = 2,
+    double spacing = 8,
     void Function(String value) onChanged,
     void Function(String value) onFilled,
     void Function(String value) onDone,
