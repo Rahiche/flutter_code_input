@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       length: 4,
       keyboardType: TextInputType.number,
       builder: CodeInputBuilders.lightCircle(),
+      spacing: 8,
       onFilled: (value) => print('Your input is $value.'),
       onDone: (value) => print('Your input is $value.'),
     );
