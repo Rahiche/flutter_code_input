@@ -74,7 +74,7 @@ class CodeInput extends StatefulWidget {
     );
   }
 
-  /// The length of character entities to always display.
+  /// The length of character widgets to always display.
   ///
   /// ## Sample code
   ///
@@ -132,7 +132,7 @@ class CodeInput extends StatefulWidget {
   /// ```
   final List<TextInputFormatter> inputFormatters;
 
-  /// A builder for the character entities.
+  /// A builder for the character widgets.
   ///
   /// See [CodeInputBuilders] for examples.
   final CodeInputBuilder builder;
@@ -208,7 +208,7 @@ class _CodeInputState extends State<CodeInput> {
           )),
       // These are the actual character widgets. A transparent container lies
       // right below the gesture detector, so all taps get collected, even
-      // the ones between the character entities.
+      // the ones between the character widgets.
       GestureDetector(
           onTap: () {
             final focusScope = FocusScope.of(context);
@@ -226,18 +226,21 @@ class _CodeInputState extends State<CodeInput> {
               children: List.generate(widget.length, (i) {
                 final hasFocus = controller.selection.start == i;
                 final char = i < text.length ? text[i] : '';
-                final characterEntity = Padding(
-                  padding: EdgeInsets.only(left: widget.spacing),
-                  child: widget.builder(hasFocus, char),
-                );
+                var characterWidget = widget.builder(hasFocus, char);
+                if (i > 0) {
+                  characterWidget = Padding(
+                    padding: EdgeInsets.only(left: widget.spacing),
+                    child: widget.builder(hasFocus, char),
+                  );
+                }
 
                 assert(
-                    characterEntity != null,
-                    'The builder for the character entity at position $i '
+                    characterWidget != null,
+                    'The builder for the character widget at position $i '
                     'returned null. It did${hasFocus ? ' not' : ''} have the '
                     'focus and the character passed to it was \'$char\'.');
 
-                return characterEntity;
+                return characterWidget;
               }),
             ),
           )),
@@ -246,7 +249,7 @@ class _CodeInputState extends State<CodeInput> {
 }
 
 /// An abstract class that provides some commonly-used builders for the
-/// character entities.
+/// character widgets.
 ///
 /// * [containerized]: A builder putting chars in an animated container.
 /// * [circle]: A builder putting chars in circles.
