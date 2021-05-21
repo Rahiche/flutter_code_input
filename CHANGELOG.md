@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.5]
+* add support for spacing property. Thank you [0xdecade](https://github.com/0xdecade)!
+
+## [1.0.4]
+* add support for onDone callback. Thank you [0xdecade](https://github.com/0xdecade)!
+
 ## [1.0.3]
 * BUG FIX : Not a constant expression: unexpected kernel tag
 

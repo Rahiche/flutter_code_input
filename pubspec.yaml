@@ -1,13 +1,11 @@
 name: code_input
 description: Flutter Code Input Widget
-version: 1.0.3
-authors:
-- Marcel Garus <marcel.garus@gmail.com>
-- Raouf Rahiche <rraouf30@gmail.com>
+version: 1.0.5
 homepage: https://github.com/Rahiche/flutter_code_input
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
+
   
 dependencies:
   flutter:
