@@ -28,36 +28,32 @@ typedef CodeInputBuilder = Widget Function(bool hasFocus, String char);
 
 class CodeInput extends StatefulWidget {
   CodeInput._({
-    Key key,
-    @required this.length,
-    @required this.focusNode,
-    @required this.keyboardType,
-    @required this.inputFormatters,
-    @required this.builder,
-    this.spacing,
+    Key? key,
+    required this.length,
+    required this.focusNode,
+    required this.keyboardType,
+    required this.inputFormatters,
+    required this.builder,
+    this.spacing = 8,
     this.onChanged,
     this.onFilled,
     this.onDone,
   }) : super(key: key);
 
   factory CodeInput({
-    Key key,
-    @required int length,
-    FocusNode focusNode,
+    Key? key,
+    required int length,
+    FocusNode? focusNode,
     TextInputType keyboardType = TextInputType.text,
-    List<TextInputFormatter> inputFormatters,
-    @required CodeInputBuilder builder,
+    List<TextInputFormatter>? inputFormatters,
+    required CodeInputBuilder builder,
     double spacing = 8,
-    void Function(String value) onChanged,
-    void Function(String value) onFilled,
-    void Function(String value) onDone,
+    void Function(String value)? onChanged,
+    void Function(String value)? onFilled,
+    void Function(String value)? onDone,
   }) {
-    assert(length != null);
     assert(length > 0, 'The length needs to be larger than zero.');
     assert(length.isFinite, 'The length needs to be finite.');
-    assert(keyboardType != null);
-    assert(builder != null,
-        'The builder is required for rendering the character segments.');
 
     return CodeInput._(
       key: key,
@@ -141,13 +137,13 @@ class CodeInput extends StatefulWidget {
   final double spacing;
 
   /// A callback for changes to the input.
-  final void Function(String value) onChanged;
+  final void Function(String value)? onChanged;
 
   /// A callback for when the input is filled.
-  final void Function(String value) onFilled;
+  final void Function(String value)? onFilled;
 
   /// A callback for when the done button clicked
-  final void Function(String value) onDone;
+  final void Function(String value)? onDone;
 
   /// A helping function that creates input formatters for a given [length] and
   /// [keyboardType].
@@ -233,13 +229,6 @@ class _CodeInputState extends State<CodeInput> {
                     child: widget.builder(hasFocus, char),
                   );
                 }
-
-                assert(
-                    characterWidget != null,
-                    'The builder for the character widget at position $i '
-                    'returned null. It did${hasFocus ? ' not' : ''} have the '
-                    'focus and the character passed to it was \'$char\'.');
-
                 return characterWidget;
               }),
             ),
@@ -262,13 +251,13 @@ abstract class CodeInputBuilders {
   /// Builds the input inside an animated container.
   static CodeInputBuilder containerized({
     Duration animationDuration = const Duration(milliseconds: 50),
-    @required Size totalSize,
-    @required Size emptySize,
-    @required Size filledSize,
-    @required BoxDecoration emptyDecoration,
-    @required BoxDecoration filledDecoration,
-    @required TextStyle emptyTextStyle,
-    @required TextStyle filledTextStyle,
+    required Size totalSize,
+    required Size emptySize,
+    required Size filledSize,
+    required BoxDecoration emptyDecoration,
+    required BoxDecoration filledDecoration,
+    required TextStyle emptyTextStyle,
+    required TextStyle filledTextStyle,
   }) {
     return (bool hasFocus, String char) => Container(
         width: totalSize.width,
@@ -290,9 +279,9 @@ abstract class CodeInputBuilders {
       {double totalRadius = 30.0,
       double emptyRadius = 10.0,
       double filledRadius = 25.0,
-      @required Border border,
-      @required Color color,
-      @required TextStyle textStyle}) {
+      required Border border,
+      required Color color,
+      required TextStyle textStyle}) {
     final decoration = BoxDecoration(
       shape: BoxShape.circle,
       border: border,
@@ -315,9 +304,9 @@ abstract class CodeInputBuilders {
     Size emptySize = const Size(20.0, 20.0),
     Size filledSize = const Size(40.0, 60.0),
     BorderRadius borderRadius = BorderRadius.zero,
-    @required Border border,
-    @required Color color,
-    @required TextStyle textStyle,
+    required Border border,
+    required Color color,
+    required TextStyle textStyle,
   }) {
     final decoration = BoxDecoration(
       border: border,
