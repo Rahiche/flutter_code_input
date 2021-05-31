@@ -1,5 +1,8 @@
 # Changelog
 
+## [2.0.0]
+* Migrate to null-safety. Thank you [0xdecade](https://github.com/0xdecade)!
+
 ## [1.0.5]
 * add support for spacing property. Thank you [0xdecade](https://github.com/0xdecade)!
 
