@@ -216,21 +216,25 @@ class _CodeInputState extends State<CodeInput> {
           },
           child: Container(
             color: Colors.transparent,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.min,
-              children: List.generate(widget.length, (i) {
-                final hasFocus = controller.selection.start == i;
-                final char = i < text.length ? text[i] : '';
-                var characterWidget = widget.builder(hasFocus, char);
-                if (i > 0) {
-                  characterWidget = Padding(
-                    padding: EdgeInsets.only(left: widget.spacing),
-                    child: widget.builder(hasFocus, char),
-                  );
-                }
-                return characterWidget;
-              }),
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(widget.length, (i) {
+                  final hasFocus = controller.selection.start == i;
+                  final char = i < text.length ? text[i] : '';
+                  var characterWidget = widget.builder(hasFocus, char);
+                  if (i > 0) {
+                    characterWidget = Padding(
+                      padding:
+                          EdgeInsetsDirectional.only(start: widget.spacing),
+                      child: widget.builder(hasFocus, char),
+                    );
+                  }
+                  return characterWidget;
+                }),
+              ),
             ),
           )),
     ]);
