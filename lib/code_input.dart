@@ -224,12 +224,12 @@ class _CodeInputState extends State<CodeInput> {
                 children: List.generate(widget.length, (i) {
                   final hasFocus = controller.selection.start == i;
                   final char = i < text.length ? text[i] : '';
-                  var characterWidget = widget.builder(hasFocus, char);
+                  final characterWidget = widget.builder(hasFocus, char);
                   if (i > 0) {
-                    characterWidget = Padding(
+                    return Padding(
                       padding:
                           EdgeInsetsDirectional.only(start: widget.spacing),
-                      child: widget.builder(hasFocus, char),
+                      child: characterWidget,
                     );
                   }
                   return characterWidget;
